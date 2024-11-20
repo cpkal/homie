@@ -1,0 +1,93 @@
+.bg-primary-custom {
+    background-color: #a6b6a9;
+}
+
+.bg-secondary-custom {
+    background-color: #d4b4b0;
+}
+
+.custom-input-text {
+    background-color: #ffffff;
+    border: 1px solid #060606;
+    padding: 5px;
+}
+
+.custom-btn-outline-secondary {
+    border: 1px solid #060606;
+    padding: 5px;
+    background-color: #ffffff;
+    color: black;
+}
+
+.custom-btn-outline-secondary:hover {
+    background-color: #060606;
+    color: white;
+}
+
+.custom-btn-secondary {
+    background-color: #060606;
+    color: white;
+    padding: 5px;
+}
+
+.custom-btn-secondary:hover {
+    background-color: #ffffff;
+    color: black;
+    border: 1px solid #060606;
+}
+
+.custom-btn-primary {
+    background-color: #a6b6a9;
+    /* remove default style of button */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+}
+
+.custom-btn-primary:hover {
+    background-color: #edeaea;
+    color: black;
+    
+}
+
+.w-full {
+    width: 100%;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.h-view {
+    height: 100vh;
+}
+
+.border-primary-custom {
+    border: 1px solid #a6b6a9;
+}
+
+.border-r-primary-custom {
+    border-right: 1px solid #a6b6a9;
+}
+
+.border-l-primary-custom {
+    border-left: 1px solid #a6b6a9;
+}
+
+.border-t-primary-custom {
+    border-top: 1px solid #a6b6a9;
+}
+
+.border-b-primary-custom {
+    border-bottom: 1px solid #a6b6a9;
+}
+
+.a-custom {
+    color: #060606;
+    /* remove default styles */
+    text-decoration: none;
+}
+
+.a-custom:hover {
+    color: #a6b6a9;
+}
