@@ -11,30 +11,30 @@
             </div>
             
             <div class="p-3">
-                <button class="custom-btn-secondary text-center p-2 w-100 d-flex flex-column align-items-center" style="border-radius: 40px / 35px; font-size: 16px;">
+                <button class="custom-btn-secondary text-center p-0 p-md-2 w-100 d-flex flex-column align-items-center" style="border-radius: 40px / 35px; font-size: 16px;">
                     <p class="d-none d-md-block">Wilayah</p>
                     <img class="d-block d-md-none" src="{{ asset('assets/images/placeholder.png') }}" height="18" width="18">
                 </button>
             </div>
-            <div class="p-3">
+            <div class="py-3 px-2">
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('assets/images/home.png') }}" class="mx-2" height="18" width="18" />
                     <a href="" class="d-none d-md-block">Beranda</a>
                 </div>
             </div>
-            <div class="p-3">
+            <div class="py-3 px-2">
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('assets/images/user.png') }}" class="mx-2" height="18" width="18" />
                     <a href="" class="d-none d-md-block">Profile</a>
                 </div>
             </div>
-            <div class="p-3">
+            <div class="py-3 px-2">
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('assets/images/setting.png') }}" class="mx-2" height="18" width="18" />
                     <a href="" class="d-none d-md-block">Pengaturan</a>
                 </div>
             </div>
-            <div class="p-3">
+            <div class="py-3 px-2">
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('assets/images/conversation.png') }}" class="mx-2" height="18" width="18" />
                     <a href="" class="d-none d-md-block">Konsultasi</a>
@@ -46,14 +46,14 @@
                 <div class="col-8">
                     <input type="text" class="w-100 input-custom" placeholder="Cari...">
                 </div>
-                <div class="col-2 d-flex">
-                    <img class="d-block d-lg-none" src="{{ asset('assets/images/indonesia.png') }}" width="32" >
+                <div class="col-4 d-flex">
+                    {{-- <img class="d-block d-lg-none" src="{{ asset('assets/images/indonesia.png') }}" width="32" > --}}
                     <img src="{{ asset('assets/images/bell.png') }}" alt="Notification" height="32" width="32" class="mx-2"  />
                     <img src="{{ asset('assets/images/user-profile.png') }}" alt="User" height="32" width="32"  />
                 </div>
             </div>
             <div class="p-3">
-                <div class="row row-cols-2 row-cols-md-3">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
                         <div class="col">
                             <a href="{{ url('/indekos/sagita-kost-2022') }}">
                                 <div>

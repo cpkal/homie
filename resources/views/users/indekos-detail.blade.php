@@ -8,14 +8,14 @@
         Konsultasi
     </button>
     <div class="navbar fixed-top mb-5 mb-lg-0">
-        <img class="" src="{{ asset('assets/images/logo.png') }}" alt="">
-        <div class="nav-items">
+        <img class="d-none d-md-block" src="{{ asset('assets/images/logo.png') }}" alt="">
+        <div class="nav-items d-none d-md-block">
             <a href="{{ url('/') }}" class="mx-1" style="color: white;">Beranda</a>
             <a href="" class="mx-1" style="color: white;">Wilayah</a>
             <a href="" class="mx-1" style="color: white;">Properti</a>
             <a href="" class="mx-1" style="color: white;">Tentang</a>
         </div>
-        <div class="nav-trailing ">
+        <div class="nav-trailing d-none d-md-block">
             <button class="custom-btn-secondary">Konsultasi</button>
             <img src="{{ asset('assets/images/user.png') }}" class="mx-3" height="32" width="32">
         </div>
