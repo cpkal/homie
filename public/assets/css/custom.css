@@ -22,6 +22,8 @@ p {
 
 .bg-secondary-custom {
     background-color: #d4b4b0;
+    /* transparent */
+    /* background-color: rgba(212, 180, 176, 0.5); */
 }
 
 .custom-input-text {
@@ -71,7 +73,7 @@ p {
     background-color: #a6b6a9;
     color: white;
     padding: 6px 20px;
-    border-radius: 25px;
+    /* border-radius: 25px; */
     border: none;;
 }
 
@@ -192,3 +194,59 @@ p {
 .rating img {
     margin-right: 5px;
 }
+
+.custom-white-card {
+    background-color: white;
+    border-radius: 25px;
+    padding: 20px;
+}
+
+.slick-slide {
+    margin: 0 10px; /* Add horizontal gap */
+  }
+
+  .slick-list {
+    margin: 0 -10px; /* Offset the margin for proper alignment */
+  }
+
+  .slick-slide img {
+    width: 75%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    display: block;
+  }
+
+  /* Customize arrows */
+  .slick-prev, .slick-next {
+    z-index: 1;
+    width: 50px;
+    height: 50px;
+  }
+
+  .slick-prev {
+    left: -60px; /* Add gap between the arrow and the slider */
+  }
+
+  .slick-next {
+    right: -60px; /* Add gap between the arrow and the slider */
+  }
+
+  .slick-prev:before, .slick-next:before {
+    font-size: 40px; /* Make arrows larger */
+    color: white; /* Change arrow color */
+  }
+
+  /* d-none trapezoid on small screen */
+    @media (max-width: 768px) {
+        .trapezoid {
+            transform: translateX(0%);
+            /* position: relative; */
+            /* background-color: #d4b4b0; */
+            /* clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%); */
+            padding: 20px; /* Adjust padding to control the spacing inside */
+        }
+        .bg-secondary-custom {
+            background-color: #d4b4b0;
+        }
+    }

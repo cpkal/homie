@@ -79,10 +79,10 @@
 <div class="bg-primary-custom h-view" style="padding-left: 15%; padding-right: 15%; padding-top: 3%;">
     <div class="container">
         <div class="row justify-content-between">
-            <div class="col-6 col-md-0">
+            <div class="col d-none d-lg-block col-0 col-lg-6">
                 <img src="{{ asset('assets/images/login_page_logo.png') }}" alt="Logo" class="w-full h-full"  />
             </div>
-            <div class="col-6 bg-white">
+            <div class="col col-12 col-lg-6 bg-white mt-5 mt-md-0">
                 <div class="p-4">
                     <div>
                         <h4 style="font-weight: bold;">REGISTER</h4>
@@ -100,7 +100,7 @@
                         <div class="col">
                             <hr />
                         </div>
-                        <div class="col text-center">
+                        <div class="col-auto text-center">
                             <p>OR WITH</p>
                         </div>
                         <div class="col">
@@ -115,8 +115,8 @@
                             <button class="custom-btn-outline-secondary w-full">SIGN IN</button>
                         </div>
                     </div>
-                    <div class="row mt-4 font-xs text-center px-4">
-                        <p>By registering, You agree to the Terms, COnditions and Policies of Borcelle & Privacy Policy</p>
+                    <div class="row mt-4 font-xs text-center px-0 px-md-4">
+                        <p>By registering, You agree to the Terms, Conditions and Policies of Borcelle & Privacy Policy</p>
                     </div>
                     <div class="row mt-4">
                         <p>Have an account? <a href="{{ route('login') }}">Login</a></p>
