@@ -237,6 +237,30 @@ p {
     color: white; /* Change arrow color */
   }
 
+  .text-white {
+    color: white;
+  }
+
+  .input-border-yellow-radius-full {
+    border-radius: 25px;
+    border: 3px solid #f7d488;
+    padding: 5px 15px;
+    /* bg primary */
+    background-color: #a6b6a9;
+    /* placeholder black */
+    color: #060606;
+  }
+
+    .input-border-yellow-radius-full::placeholder {
+        color: #060606;
+    }
+
+    .white-radius-full {
+        border-radius: 25px;
+        background-color: white;
+        padding: 5px 15px;
+    }
+
   /* d-none trapezoid on small screen */
     @media (max-width: 768px) {
         .trapezoid {

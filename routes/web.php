@@ -8,6 +8,10 @@ Route::get('/login', [App\Http\Controllers\User\LoginController::class, 'index']
 
 Route::get('/indekos/{slug}', [App\Http\Controllers\User\IndekosController::class, 'index'])->name('indexkos.detail');
 
+Route::get('/profile', [App\Http\Controllers\User\ProfileController::class, 'index'])->name('profile');
+
+Route::get('/pengaturan', [App\Http\Controllers\User\PengaturanController::class, 'index'])->name('pengaturan');
+
 Auth::routes();
 
 // route group dashboard
