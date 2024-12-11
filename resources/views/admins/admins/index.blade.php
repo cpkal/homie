@@ -11,7 +11,7 @@
     <div class="card">
         <div class="card-header">
             <div class="card-tools">
-                <a href="{{ route('admin.create') }}" class="btn btn-primary">Tambah admin</a>
+                <a href="{{ route('account.create') }}" class="btn btn-primary">Tambah admin</a>
             </div>
         </div>
         <div class="card-body">
@@ -20,26 +20,29 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nama</th>
-                    <th scope="col">Alamat</th>
-                    <th scope="col">Owner</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
                     <th scope="col">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach ($admins as $admin)
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                    <th scope="row">{{  $loop->iteration }}</th>
+                    <td>{{ $admin->name }}</td>
+                    <td>{{ $admin->email }}</td>
+                    <td>{{ $admin->phone }}</td>
                     <td>
-                        <a href="{{ route('admin.edit', 1) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('admin.destroy', 1) }}" method="post" class="d-inline">
+                        <a href="{{ route('account.edit', $admin->id) }}" class="btn btn-warning">Edit</a>
+                        <a href="{{ route('account.edit-password', $admin->id) }}" class="btn btn-info">Change Password</a>
+                        <form action="{{ route('account.destroy', $admin->id) }}" method="post" class="d-inline">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger">Hapus</button>
                         </form>
                     </td>
                   </tr>
+                  @endforeach
                 </tbody>
               </table>
         </div>

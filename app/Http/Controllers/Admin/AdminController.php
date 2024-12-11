@@ -12,7 +12,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admins.admins.index');
+        $data['admins'] = \App\Models\Admin::all();
+        return view('admins.admins.index', $data);
     }
 
     /**
@@ -20,7 +21,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('admins.admins.create');
     }
 
     /**
@@ -28,7 +29,16 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      
+
+        $admin = new \App\Models\Admin;
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->phone = $request->phone;
+        $admin->password = bcrypt($request->password);
+        $admin->save();
+
+        return redirect('admin/account')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -44,7 +54,8 @@ class AdminController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['admin'] = \App\Models\Admin::find($id);
+        return view('admins.admins.edit', $data);
     }
 
     /**
@@ -52,7 +63,13 @@ class AdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $admin = \App\Models\Admin::find($id);
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->phone = $request->phone;
+        $admin->save();
+
+        return redirect('admin/account')->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -60,6 +77,24 @@ class AdminController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $admin = \App\Models\Admin::find($id);
+        $admin->delete();
+
+        return redirect('admin/account')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function editPassword(string $id)
+    {
+        $data['admin'] = \App\Models\Admin::find($id);
+        return view('admins.admins.edit-password', $data);
+    }
+
+    public function updatePassword(Request $request, string $id)
+    {
+        $admin = \App\Models\Admin::find($id);
+        $admin->password = bcrypt($request->password);
+        $admin->save();
+
+        return redirect('admin/account')->with('success', 'Password berhasil diubah');
     }
 }

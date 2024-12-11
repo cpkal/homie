@@ -1,0 +1,47 @@
+@extends('adminlte::page')
+
+@section('title', 'Dashboard')
+
+@section('content_header')
+    
+@stop
+
+@section('content')
+    <div class="card">
+        <div class="card-header">
+            <h3>Edit Admin</h3>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('account.update', ['account' => $admin->id]) }}" method="post" enctype="multipart/form-data" >
+                @csrf
+                @method('put')
+                <div class="form-group" >
+                    <label for="name">Nama Admin</label>
+                    <input type="text" name="name" class="form-control"  value="{{ $admin->name }}">
+                </div>
+                <div class="form-group" >
+                    <label for="email">Email</label>
+                    {{-- textarea --}}
+                    <textarea name="email" class="form-control" >
+                        {{ $admin->email }}
+                    </textarea>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Nomor Telepon</label>
+                    <input type="text" name="phone" class="form-control" value="{{ $admin->phone }}" >
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">Simpan</button>
+            </form>
+        </div>
+    </div>
+@stop
+
+@section('css')
+    {{-- Add here extra stylesheets --}}
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+@stop
+
+@section('js')
+    
+@stop

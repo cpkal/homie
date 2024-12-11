@@ -13,11 +13,14 @@ Route::get('/profile', [App\Http\Controllers\User\ProfileController::class, 'ind
 Route::get('/pengaturan', [App\Http\Controllers\User\PengaturanController::class, 'index'])->name('pengaturan');
 
 Auth::routes();
-
-// route group dashboard
+Route::get('/admin/login', [App\Http\Controllers\Admin\LoginController::class, 'index'])->name('admin.login')->middleware('guest:admin');
+Route::post('/admin/login', [App\Http\Controllers\Admin\LoginController::class, 'login']);
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('indekos', App\Http\Controllers\Admin\IndekosController::class);
     Route::resource('booking', App\Http\Controllers\Admin\BookingController::class);
     Route::resource('account', App\Http\Controllers\Admin\AdminController::class);
-});
+    Route::get('/account/{id}/edit-password', [App\Http\Controllers\Admin\AdminController::class, 'editPassword'])->name('account.edit-password');
+    Route::put('/account/{id}/update-password', [App\Http\Controllers\Admin\AdminController::class, 'updatePassword'])->name('account.update-password');
+    Route::resource('customers', App\Http\Controllers\Admin\CustomerController::class);
+})->middleware('auth:admin');

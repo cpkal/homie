@@ -18,119 +18,22 @@
             </div>
             <div class="p-3">
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-                        <div class="col">
-                            <a href="{{ url('/indekos/sagita-kost-2022') }}">
-                                <div>
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSeVsof0lPg6HGNNZJs7RnDa8SFQYTxIxUSA&s" class="custom-card-thumbnail ratio-portrait" alt="Doctor" />
+                    @foreach ($indekos_with_rooms as $item)
+                    <div class="col">
+                        <a href="{{ url('/indekos/' . $item->id) }}">
+                            <div>
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSeVsof0lPg6HGNNZJs7RnDa8SFQYTxIxUSA&s" class="custom-card-thumbnail ratio-portrait" alt="Doctor" />
+                            </div>
+                            <div class="custom-card-body px-4 py-3 d-flex align-items-center justify-content-between">
+                                <div class="mt-4 mt-lg-4">
+                                    <p class="fw-bold">{{ $item->rooms[0]->name }}</p>
+                                    <p class="fw-normal">{{ $item->rooms[0]->price }}</p>
                                 </div>
-                                <div class="custom-card-body px-4 py-3 d-flex align-items-center justify-content-between">
-                                    <div class="mt-4 mt-lg-4">
-                                        <p class="fw-bold">Kost Azzahra 2</p>
-                                        <p class="fw-normal">Rp. 1.000.000 / bulan</p>
-                                    </div>
-                                    <img src="{{ asset('assets/images/plus.png') }}" class="mt-4" height="32" width="32" />
-                                </div>
-                            </a>
-                        </div>
-                   
-                        <div class="col">
-                            <a href="{{ url('/indekos/sagita-kost-2022') }}">
-                                <div>
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSeVsof0lPg6HGNNZJs7RnDa8SFQYTxIxUSA&s" class="custom-card-thumbnail ratio-portrait" alt="Doctor" />
-                                </div>
-                                <div class="custom-card-body px-4 py-3 d-flex align-items-center justify-content-between">
-                                    <div class="mt-4 mt-lg-4">
-                                        <p class="fw-bold">Kost Azzahra 2</p>
-                                        <p class="fw-normal">Rp. 1.000.000 / bulan</p>
-                                    </div>
-                                    <img src="{{ asset('assets/images/plus.png') }}" class="mt-4" height="32" width="32" />
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="{{ url('/indekos/sagita-kost-2022') }}">
-                                <div>
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSeVsof0lPg6HGNNZJs7RnDa8SFQYTxIxUSA&s" class="custom-card-thumbnail ratio-portrait" alt="Doctor" />
-                                </div>
-                                <div class="custom-card-body px-4 py-3 d-flex align-items-center justify-content-between">
-                                    <div class="mt-4 mt-lg-4">
-                                        <p class="fw-bold">Kost Azzahra 2</p>
-                                        <p class="fw-normal">Rp. 1.000.000 / bulan</p>
-                                    </div>
-                                    <img src="{{ asset('assets/images/plus.png') }}" class="mt-4" height="32" width="32" />
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="{{ url('/indekos/sagita-kost-2022') }}">
-                                <div>
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSeVsof0lPg6HGNNZJs7RnDa8SFQYTxIxUSA&s" class="custom-card-thumbnail ratio-portrait" alt="Doctor" />
-                                </div>
-                                <div class="custom-card-body px-4 py-3 d-flex align-items-center justify-content-between">
-                                    <div class="mt-4 mt-lg-4">
-                                        <p class="fw-bold">Kost Azzahra 2</p>
-                                        <p class="fw-normal">Rp. 1.000.000 / bulan</p>
-                                    </div>
-                                    <img src="{{ asset('assets/images/plus.png') }}" class="mt-4" height="32" width="32" />
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="{{ url('/indekos/sagita-kost-2022') }}">
-                                <div>
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSeVsof0lPg6HGNNZJs7RnDa8SFQYTxIxUSA&s" class="custom-card-thumbnail ratio-portrait" alt="Doctor" />
-                                </div>
-                                <div class="custom-card-body px-4 py-3 d-flex align-items-center justify-content-between">
-                                    <div class="mt-4 mt-lg-4">
-                                        <p class="fw-bold">Kost Azzahra 2</p>
-                                        <p class="fw-normal">Rp. 1.000.000 / bulan</p>
-                                    </div>
-                                    <img src="{{ asset('assets/images/plus.png') }}" class="mt-4" height="32" width="32" />
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="{{ url('/indekos/sagita-kost-2022') }}">
-                                <div>
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSeVsof0lPg6HGNNZJs7RnDa8SFQYTxIxUSA&s" class="custom-card-thumbnail ratio-portrait" alt="Doctor" />
-                                </div>
-                                <div class="custom-card-body px-4 py-3 d-flex align-items-center justify-content-between">
-                                    <div class="mt-4 mt-lg-4">
-                                        <p class="fw-bold">Kost Azzahra 2</p>
-                                        <p class="fw-normal">Rp. 1.000.000 / bulan</p>
-                                    </div>
-                                    <img src="{{ asset('assets/images/plus.png') }}" class="mt-4" height="32" width="32" />
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="{{ url('/indekos/sagita-kost-2022') }}">
-                                <div>
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSeVsof0lPg6HGNNZJs7RnDa8SFQYTxIxUSA&s" class="custom-card-thumbnail ratio-portrait" alt="Doctor" />
-                                </div>
-                                <div class="custom-card-body px-4 py-3 d-flex align-items-center justify-content-between">
-                                    <div class="mt-4 mt-lg-4">
-                                        <p class="fw-bold">Kost Azzahra 2</p>
-                                        <p class="fw-normal">Rp. 1.000.000 / bulan</p>
-                                    </div>
-                                    <img src="{{ asset('assets/images/plus.png') }}" class="mt-4" height="32" width="32" />
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="{{ url('/indekos/sagita-kost-2022') }}">
-                                <div>
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSeVsof0lPg6HGNNZJs7RnDa8SFQYTxIxUSA&s" class="custom-card-thumbnail ratio-portrait" alt="Doctor" />
-                                </div>
-                                <div class="custom-card-body px-4 py-3 d-flex align-items-center justify-content-between">
-                                    <div class="mt-4 mt-lg-4">
-                                        <p class="fw-bold">Kost Azzahra 2</p>
-                                        <p class="fw-normal">Rp. 1.000.000 / bulan</p>
-                                    </div>
-                                    <img src="{{ asset('assets/images/plus.png') }}" class="mt-4" height="32" width="32" />
-                                </div>
-                            </a>
-                        </div>
+                                <img src="{{ asset('assets/images/plus.png') }}" class="mt-4" height="32" width="32" />
+                            </div>
+                        </a>
+                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

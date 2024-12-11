@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Indekos;
+use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class IndekosController extends Controller
 {
@@ -12,7 +15,9 @@ class IndekosController extends Controller
      */
     public function index()
     {
-        return view('admins.indekos.index');
+        $data['indekos'] = Indekos::all();
+
+        return view('admins.indekos.index', $data);
     }
 
     /**
@@ -29,8 +34,37 @@ class IndekosController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+    {        
+        // start transaction
+        DB::beginTransaction();
+
+
+        $indekos = new Indekos();
+        $indekos->name = $request->name;
+        $indekos->address = $request->address;
+        $indekos->owner_name = $request->owner;
+        $indekos->save();
+        
+        foreach ($request->room_name as $idx => $room_name) {
+            $room = new Room();
+            $room->name = $room_name;
+            $room->price = $request->price[$idx];
+            $room->room_total = $request->room[$idx];
+            $room->room_available = $request->available[$idx];
+            $room->description = $request->description[$idx];
+            $room->room_type_id = $request->room_type_id[$idx];
+            $room->indekos_id = $indekos->id;
+            $room->save();
+
+            // foreach($request->facilities[$idx] as $facility) {
+            //     $room->facilities()->attach($facility);
+            // }
+        }
+
+        // commit transaction
+        DB::commit();
+
+        return redirect('admin/indekos');
     }
 
     /**
@@ -46,7 +80,11 @@ class IndekosController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['indekos'] = Indekos::find($id);
+        $data['room_types'] = \App\Models\RoomType::all();
+        $data['rooms'] = Room::where('indekos_id', $id)->get();
+        // $data['facilities'] = \App\Models\Facility::all();
+        return view('admins.indekos.edit', $data);
     }
 
     /**
@@ -54,7 +92,37 @@ class IndekosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // return $request->all();
+        // start transaction
+        DB::beginTransaction();
+
+        $indekos = Indekos::find($id);
+        $indekos->name = $request->name;
+        $indekos->address = $request->address;
+        $indekos->owner_name = $request->owner;
+        $indekos->save();
+        
+        foreach ($request->room_name as $idx => $room_name) {
+            $room = Room::find($request->room_id[$idx]);
+            $room->name = $room_name;
+            $room->price = $request->price[$idx];
+            $room->room_total = $request->room[$idx];
+            $room->room_available = $request->available[$idx];
+            $room->description = $request->description[$idx];
+            $room->room_type_id = $request->room_type_id[$idx];
+            $room->indekos_id = $indekos->id;
+            $room->save();
+
+            // $room->facilities()->detach();
+            // foreach($request->facilities[$idx] as $facility) {
+            //     $room->facilities()->attach($facility);
+            // }
+        }
+
+        // commit transaction
+        DB::commit();
+
+        return redirect('admin/indekos');
     }
 
     /**
@@ -62,6 +130,16 @@ class IndekosController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $indekos = Indekos::find($id);
+        
+        //find room
+        $rooms = Room::where('indekos_id', $id)->get();
+        foreach ($rooms as $room) {
+            $room->delete();
+        }
+
+        $indekos->delete();
+
+        return redirect('admin/indekos');
     }
 }

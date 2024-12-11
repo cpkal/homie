@@ -19,27 +19,31 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nama</th>
+                    <th scope="col">Nama Kos</th>
                     <th scope="col">Alamat</th>
-                    <th scope="col">Owner</th>
+                    <th scope="col">Nama Owner</th>
+                    <th scope="col">Nomor Telepon Owner</th>
                     <th scope="col">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>
-                        <a href="{{ route('indekos.edit', 1) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('indekos.destroy', 1) }}" method="post" class="d-inline">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="btn btn-danger">Hapus</button>
-                        </form>
-                    </td>
-                  </tr>
+                  @foreach ($indekos as $item)
+                      <tr>
+                          <th scope="row">{{ $loop->iteration }}</th>
+                          <td>{{ $item->name }}</td>
+                          <td>{{ $item->address }}</td>
+                          <td>{{ $item->owner_name }}</td>
+                        <td>{{ $item->owner_phone ?? '' }}</td>
+                          <td>
+                              <a href="{{ route('indekos.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                              <form action="{{ route('indekos.destroy', $item->id) }}" method="post" class="d-inline">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                              </form>
+                          </td>
+                      </tr>
+                  @endforeach
                 </tbody>
               </table>
         </div>

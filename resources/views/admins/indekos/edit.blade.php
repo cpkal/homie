@@ -9,23 +9,26 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3>Tambah Indekos</h3>
+            <h3>Edit Indekos</h3>
         </div>
         <div class="card-body">
-            <form action="{{ route('indekos.store') }}" method="post" enctype="multipart/form-data" >
+            <form action="{{ route('indekos.update', ["indeko" => $indekos->id]) }}" method="post" enctype="multipart/form-data" >
                 @csrf
+                @method('PUT')
                 <div class="form-group" >
                     <label for="name">Nama Indekos</label>
-                    <input type="text" name="name" class="form-control" >
+                    <input type="text" name="name" class="form-control" value="{{ $indekos->name }}">
                 </div>
                 <div class="form-group" >
                     <label for="address">Alamat Indekos</label>
                     {{-- textarea --}}
-                    <textarea name="address" class="form-control" ></textarea>
+                    <textarea name="address" class="form-control" >
+                        {{ $indekos->address }}
+                    </textarea>
                 </div>
                 <div class="form-group" >
                     <label for="owner">Pemilik Kos</label>
-                    <input type="text" name="owner" class="form-control" >
+                    <input type="text" name="owner" class="form-control" value="{{ $indekos->owner_name }}">
                 </div>
                 <hr>
                 
@@ -35,76 +38,82 @@
                 </div>
                 <div class="card mt-2" id="rooms-indekos">
 
-                    <div class="accordion" id="accordionExample">
-                        <div class="card">
-                          <div class="card-header" id="headingOne">
-                            <h2 class="mb-0">
-                              <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <h3>Tipe Kamar 1</h3>
-                              </button>
-                            </h2>
-                          </div>
-                      
-                          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="room_name">Nama</label>
-                                    <input type="text" name="room_name[]" class="form-control" placeholder="Kamar Tipe A" >
-                                </div>
-                                <div class="form-group">
-                                    <label for="price">Harga/bulan</label>
-                                    <input type="text" name="price[]" class="form-control" >
-                                </div>
-                                <div class="form-group">
-                                    <label for="room">Jumlah Kamar</label>
-                                    <input type="number" name="room[]" class="form-control" >
-                                </div>
-                                <div class="form-group">
-                                    <label for="available">Kamar Tersedia</label>
-                                    <input type="number" name="available[]" class="form-control" >
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Deskripsi</label>
-                                    <textarea name="description[]" class="form-control" ></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="room_type">Tipe Kamar</label>
-                                    <select name="room_type_id[]" id="room_type" class="form-control">
-                                        <option value="">Pilih Tipe Kamar</option>
-                                        @foreach ($room_types as $room_type)
-                                            <option value="{{ $room_type->id }}">{{ $room_type->type_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <h3>Faslitas</h3>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="form-group" id="facility-indekos">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label for="fasilitas">Fasilitas</label>
-                                                        <input type="text" name="facility[][]" class="form-control" id="fasilitas">
+                    @foreach ($rooms as $room)
+                        <div class="accordion" id="accordionExample{{ $loop->iteration }}">
+                            <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse{{ $loop->iteration }}" aria-expanded="true" aria-controls="collapse{{ $loop->iteration }}">
+                                    <h3>Tipe Kamar {{ $loop->iteration }}</h3>
+                                </button>
+                                </h2>
+                            </div>
+                        
+                            <div id="collapse{{ $loop->iteration }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample{{ $loop->iteration }}">
+                                <div class="card-body">
+                                    <input type="hidden" name="room_id[]" value="{{ $room->id }}" >
+                                    <div class="form-group">
+                                        <label for="room_name">Nama</label>
+                                        <input type="text" name="room_name[]" class="form-control" placeholder="Kamar Tipe A" value="{{ $room->name }}" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price">Harga/bulan</label>
+                                        <input type="text" name="price[]" class="form-control" value="{{ $room->price }}" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="room">Jumlah Kamar</label>
+                                        <input type="number" name="room[]" class="form-control" value="{{ $room->room_total }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="available">Kamar Tersedia</label>
+                                        <input type="number" name="available[]" class="form-control" value="{{ $room->room_available }}" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Deskripsi</label>
+                                        <textarea name="description[]" class="form-control" >
+                                            {{ $room->description }}
+                                        </textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="room_type">Tipe Kamar</label>
+                                        <select name="room_type_id[]" id="room_type" class="form-control">
+                                            <option value="">Pilih Tipe Kamar</option>
+                                            @foreach ($room_types as $room_type)
+                                                <option value="{{ $room_type->id }}" {{ $room->room_type_id == $room_type->id ? 'selected' : '' }}>{{ $room_type->type_name }}</option>
+                                                {{-- <option value="{{ $room_type->id }}">{{ $room_type->type_name }}</option> --}}
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <h3>Faslitas</h3>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="form-group" id="facility-indekos">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="fasilitas">Fasilitas</label>
+                                                            <input type="text" name="facility[][]" class="form-control" id="fasilitas">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        {{-- image --}}
+                                                        <div class="form-group" >
+                                                            <label for="image">Gambar</label>
+                                                            <input type="file" name="image[][]" class="form-control" >
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col">
-                                                    {{-- image --}}
-                                                    <div class="form-group" >
-                                                        <label for="image">Gambar</label>
-                                                        <input type="file" name="image[][]" class="form-control" >
-                                                    </div>
-                                                </div>
+                                                <button type="button" class="btn btn-primary" id="add-facility">Tambah Fasilitas</button>
                                             </div>
-                                            <button type="button" class="btn btn-primary" id="add-facility">Tambah Fasilitas</button>
                                         </div>
                                     </div>
                                 </div>
+            
                             </div>
-        
-                          </div>
+                            </div>
+                            
                         </div>
-                        
-                    </div>
+                    @endforeach
                     {{-- append here --}}
                 </div>
 
