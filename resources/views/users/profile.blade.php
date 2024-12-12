@@ -1,3 +1,7 @@
+@section('title')
+    Profile
+@endsection
+
 @extends('layouts.users.app')
 
 @section('content')

@@ -2,7 +2,8 @@
     <div>
         <div class="p-3 p-md-1">
             {{-- center --}}
-            <img src="{{ asset('assets/images/logo.png') }}" class="img-fluid" alt="Logo" />
+            <img src="{{ asset('assets/images/logo.png') }}" class="img-fluid d-none d-lg-block" alt="Logo" />
+            {{-- <img src="{{ asset('assets/images/logo_mobile.jpeg') }}" class="img-fluid d-block d-lg-none" alt="Logo" /> --}}
         </div>
         
         {{-- <div class="p-3">
@@ -32,7 +33,7 @@
     </div>
 
     <div class="position-absolute bottom-0">
-        <div class="p-3 text-white ">
+        <div class="pb-2 p-lg-3 text-white ">
             <a href="{{ url('/logout') }}">Logout</a>
         </div>
     </div>

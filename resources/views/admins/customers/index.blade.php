@@ -7,11 +7,11 @@
 @stop
 
 @section('content')
-    <h3>Data Indekos</h3>
+    <h3>Data Customer</h3>
     <div class="card">
         <div class="card-header">
             <div class="card-tools">
-                <a href="{{ route('customers.create') }}" class="btn btn-primary">Tambah Customer</a>
+                {{-- <a href="{{ route('customers.create') }}" class="btn btn-primary">Tambah Customer</a> --}}
             </div>
         </div>
         <div class="card-body">

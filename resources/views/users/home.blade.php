@@ -1,3 +1,8 @@
+
+@section('title')
+    Homie
+@endsection
+
 @extends('layouts.users.app')
 
 @section('content')
@@ -56,7 +61,7 @@
             
             @if (Auth::check())
                 <div class="user-profile-card p-4 d-flex flex-column align-items-center mt-5">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpUAAT12ROzUrJj9wazmTCbvjGtLIcpe7QNg&s" class="rounded-circle" width="52" >
+                    <img src="{{ Auth::user()->image ?? asset('assets/images/user-profile.png') }}" class="rounded-circle" width="52" >
 
                     <p class="text-center mt-1 " style="font-weight: bold;">
                         {{ Auth::user()->name ?? Auth::user()->phone }}

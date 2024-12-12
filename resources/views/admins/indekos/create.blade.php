@@ -30,9 +30,9 @@
                 <hr>
                 
 
-                <div class="d-flex">
+                {{-- <div class="d-flex">
                     <button type="button" class="btn btn-primary ml-auto" id="add-room">Tambah Tipe Kamar</button>
-                </div>
+                </div> --}}
                 <div class="card mt-2" id="rooms-indekos">
 
                     <div class="accordion" id="accordionExample">

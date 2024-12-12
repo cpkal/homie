@@ -1,3 +1,7 @@
+@section('title')
+    Pengaturan
+@endsection
+
 @extends('layouts.users.app')
 
 @section('content')

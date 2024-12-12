@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -13,7 +14,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $data['customers'] = Customer::all();
+        $data['customers'] = User::all();
         return view('admins.customers.index', $data);
     }
 

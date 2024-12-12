@@ -1,3 +1,7 @@
+@section('title')
+    {{ $indekos->name }}
+@endsection 
+
 @extends('layouts.users.app')
 
 @section('content')
@@ -51,7 +55,7 @@
     
         <!-- Right section -->
         <div class="w-100 w-md-50 order-2 order-1-lg">
-            <img src="https://media.cove.sg/34610/conversions/Cove-Cherry-Homes---Public-Area-small.jpg" class="w-100" alt="Sagita Kost">
+            <img src="{{ $indekos->rooms[0]->image ?? 'https://salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled.png' }}" class="w-100" alt="Sagita Kost">
         </div>
     </div>
 
