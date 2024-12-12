@@ -7,26 +7,33 @@
         @include('layouts.users.sidebar')
         <div class="col-10 col-lg-8 offset-2 offset-md-3 offset-lg-2 bg-secondary-custom">
             <div class="row px-3 py-3 align-items-center justify-content-between border-b-primary-custom sticky-top bg-secondary-custom">
-                <div class="col-8">
-                    <input type="text" class="w-100 input-custom" placeholder="Cari...">
-                </div>
+                <form class="col-8" action="{{ url('') }}" method="GET">
+                    @csrf
+                    <div >
+                        <input type="text" name="search" class="w-100 input-custom" placeholder="Cari...">
+                    </div>
+                </form>
                 <div class="col-4 d-flex">
                     {{-- <img class="d-block d-lg-none" src="{{ asset('assets/images/indonesia.png') }}" width="32" > --}}
-                    <img src="{{ asset('assets/images/bell.png') }}" alt="Notification" height="32" width="32" class="mx-2"  />
-                    <img src="{{ asset('assets/images/user-profile.png') }}" alt="User" height="32" width="32"  />
+                    <div>
+                        <img src="{{ asset('assets/images/bell.png') }}" alt="Notification" height="32" width="32" class="mx-2"  />
+                    </div>
+                    <a href="{{ url('/profile') }}">
+                        <img src="{{ asset('assets/images/user-profile.png') }}" alt="User" height="32" width="32"  />
+                    </a>
                 </div>
             </div>
-            <div class="p-3">
+            <div class="p-3 min-vh-100">
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
                     @foreach ($indekos_with_rooms as $item)
                     <div class="col">
                         <a href="{{ url('/indekos/' . $item->id) }}">
                             <div>
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSeVsof0lPg6HGNNZJs7RnDa8SFQYTxIxUSA&s" class="custom-card-thumbnail ratio-portrait" alt="Doctor" />
+                                <img src="{{ $item->rooms[0]->image ?? 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png' }}" class="custom-card-thumbnail ratio-portrait" alt="Doctor" />
                             </div>
                             <div class="custom-card-body px-4 py-3 d-flex align-items-center justify-content-between">
                                 <div class="mt-4 mt-lg-4">
-                                    <p class="fw-bold">{{ $item->rooms[0]->name }}</p>
+                                    <p class="fw-bold">{{ $item->name }}</p>
                                     <p class="fw-normal">{{ $item->rooms[0]->price }}</p>
                                 </div>
                                 <img src="{{ asset('assets/images/plus.png') }}" class="mt-4" height="32" width="32" />
@@ -46,12 +53,21 @@
                 </div>
                 <img src="{{ asset('assets/images/indonesia.png') }}" width="32" >
             </div>
-            <div class="user-profile-card p-4 d-flex flex-column align-items-center mt-5">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpUAAT12ROzUrJj9wazmTCbvjGtLIcpe7QNg&s" class="rounded-circle" width="52" >
+            
+            @if (Auth::check())
+                <div class="user-profile-card p-4 d-flex flex-column align-items-center mt-5">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpUAAT12ROzUrJj9wazmTCbvjGtLIcpe7QNg&s" class="rounded-circle" width="52" >
 
-                <p class="text-center mt-1 " style="font-weight: bold;">Wahyu Susilo</p>
-                <p class="text-center">Cibiru, indonesia </p>
-            </div>
+                    <p class="text-center mt-1 " style="font-weight: bold;">
+                        {{ Auth::user()->name ?? Auth::user()->phone }}
+                    </p>
+                    <p class="text-center">
+                        {{ Auth::user()->address ?? 'Indonesia' }}
+                    </p>
+                </div>
+            @endif
+
+
             <div class="mt-5 text-white overflow-">
                 <h5>Pesanan Terkini</h5>
                 <div class="card-pesanan-terkini d-flex mt-3 align-items-center">

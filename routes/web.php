@@ -5,10 +5,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\User\HomeController::class, 'index'])->name('home');
 
 Route::get('/login', [App\Http\Controllers\User\LoginController::class, 'index'])->name('login');
+Route::post('/login/process', [App\Http\Controllers\User\LoginController::class, 'login'])->name('post.login');
+Route::get('/otp', [App\Http\Controllers\User\LoginController::class, 'otpView'])->name('otp');
+Route::post('/otp/process', [App\Http\Controllers\User\LoginController::class, 'otp'])->name('post.otp');
+Route::get('/logout', [App\Http\Controllers\User\LoginController::class, 'logout'])->name('logout');
 
-Route::get('/indekos/{slug}', [App\Http\Controllers\User\IndekosController::class, 'index'])->name('indexkos.detail');
+Route::get('/indekos/{id}', [App\Http\Controllers\User\IndekosController::class, 'index'])->name('indexkos.detail');
 
-Route::get('/profile', [App\Http\Controllers\User\ProfileController::class, 'index'])->name('profile');
+Route::get('/profile', [App\Http\Controllers\User\ProfileController::class, 'index'])->name('profile')->middleware('auth');
+Route::post('/profile/update', [App\Http\Controllers\User\ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 
 Route::get('/pengaturan', [App\Http\Controllers\User\PengaturanController::class, 'index'])->name('pengaturan');
 

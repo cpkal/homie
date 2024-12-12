@@ -32,13 +32,7 @@
                         <p class="fw-bold">Riwayat Sewa Kost</p>
                     </div>
                     <div class="white-radius-full mt-4">
-                        <p class="fw-bold">Riwayat Sewa Kost</p>
-                    </div>
-                    <div class="white-radius-full mt-4">
-                        <p class="fw-bold">Riwayat Sewa Kost</p>
-                    </div>
-                    <div class="white-radius-full mt-4">
-                        <p class="fw-bold">Riwayat Sewa Kost</p>
+                        <p class="fw-bold">Riwayat Transaksi</p>
                     </div>
                 </div>
                 <div class="col-7 border border-l-primary-custom">

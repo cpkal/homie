@@ -10,7 +10,15 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $data['indekos_with_rooms'] = Indekos::with('rooms')->get();
+        // get query params
+        $query = request()->query();
+
+        if(isset($query['search'])) {
+            $data['indekos_with_rooms'] = Indekos::with('rooms')->where('name', 'like', '%'.$query['search'].'%')->get();
+        } else {
+            $data['indekos_with_rooms'] = Indekos::with('rooms')->get();
+        }
+
 
         return view('users.home', $data);
     }

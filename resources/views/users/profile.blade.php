@@ -26,40 +26,45 @@
                 </div>
                 
             </div>
-            <div class="p-3 row vh-100">
-                <div class="col">
-                    <h1 class="ms-4">Profile</h1>
-                    <div class="ms-5">
-                        <div class="form-group">
-                            <input class="input-border-yellow-radius-full" type="text" placeholder="Username">
-                        </div>
-                        <div class="form-group mt-2">
-                            <input class="input-border-yellow-radius-full" type="text" placeholder="Email">
-                        </div>
-                        <div class="form-group mt-2">
-                            <input class="input-border-yellow-radius-full" type="password" placeholder="No. Telephone">
-                        </div>
-                        <div class="form-group mt-2">
-                            <input class="input-border-yellow-radius-full" type="text" placeholder="Alamat Kampus">
-                        </div>
-                        <div class="form-group mt-2">
-                            <input class="input-border-yellow-radius-full" type="text" placeholder="Gender">
-                        </div>
-                        <div class="form-group mt-2">
-                            <input class="input-border-yellow-radius-full" type="text" placeholder="Riwayat Kost">
+            <form action="{{ url('/profile/update') }}" method="POST">
+                @csrf
+                <div class="p-3 row vh-100">
+                    <div class="col">
+                        @if(session()->has('success'))
+                            <div class="alert alert-success">
+                                {{ session()->get('success') }}
+                            </div>
+                        @endif
+                        <h1 class="ms-4">Profile</h1>
+                        <div class="ms-5">
+                            <div class="form-group">
+                                <input name="name" class="input-border-yellow-radius-full" type="text" placeholder="Name" value="{{ $user->name }}">
+                            </div>
+                            <div class="form-group mt-2">
+                                <input name="email" class="input-border-yellow-radius-full" type="text" placeholder="Email" value="{{ $user->email }}">
+                            </div>
+                            <div class="form-group mt-2">
+                                <input name="phone" class="input-border-yellow-radius-full" type="text" placeholder="No. Telephone" value="{{ $user->phone }}">
+                            </div>
+                            <div class="form-group mt-2">
+                                <input name="address" class="input-border-yellow-radius-full" type="text" placeholder="Alamat Kampus" value="{{ $user->address }}">
+                            </div>
+                            <div class="form-group mt-2">
+                                <input name="gender" class="input-border-yellow-radius-full" type="text" placeholder="Gender" value="{{ $user->gender }}">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col position-relative">
-                    {{-- img --}}
-                    <div class="d-flex justify-content-center">
-                        <img src="{{ asset('assets/images/user-profile.png') }}" alt="User" height="200" width="200" class="rounded-circle" />
+                    <div class="col d-flex flex-column gap-3">
+                        {{-- img --}}
+                        <div class="d-flex justify-content-center">
+                            <img src="{{ asset('assets/images/user-profile.png') }}" alt="User" height="200" width="200" class="rounded-circle" />
+                        </div>
+                        <button class="input-border-yellow-radius-full">
+                            Simpan Perubahan
+                        </button>
                     </div>
-                    <button class="input-border-yellow-radius-full position-absolute bottom-0 end-0">
-                        Simpan Perubahan
-                    </button>
                 </div>
-            </div>
+            </form>
         </div>
         
     </div>
