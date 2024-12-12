@@ -12,27 +12,30 @@
             <h3>Tambah Indekos</h3>
         </div>
         <div class="card-body">
-            <form action="{{ route('indekos.store') }}" method="post" enctype="multipart/form-data" >
+            <form action="{{ route('indekos.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group" >
-                    <label for="name">Nama Indekos</label>
-                    <input type="text" name="name" class="form-control" >
+                    {{-- star red for indicating required --}}
+                    <label for="name">Nama Indekos  <span class="text-red font-bold">*</span> </label>
+                    <input type="text" name="name" class="form-control" value="{{ old('name') }}" >
                 </div>
                 <div class="form-group" >
-                    <label for="address">Alamat Indekos</label>
+                    <label for="address">Alamat Indekos <span class="text-red font-bold">*</span></label>
                     {{-- textarea --}}
-                    <textarea name="address" class="form-control" ></textarea>
+                    <textarea name="address" class="form-control" >
+                        {{ old('address') }}
+                    </textarea>
                 </div>
                 <div class="form-group" >
-                    <label for="owner">Pemilik Kos</label>
-                    <input type="text" name="owner" class="form-control" >
+                    <label for="owner">Pemilik Kos <span class="text-red font-bold">*</span></label>
+                    <input type="text" name="owner" class="form-control" value="{{ old('owner') }}" >
                 </div>
                 <hr>
                 
 
-                {{-- <div class="d-flex">
+                <div class="d-flex">
                     <button type="button" class="btn btn-primary ml-auto" id="add-room">Tambah Tipe Kamar</button>
-                </div> --}}
+                </div>
                 <div class="card mt-2" id="rooms-indekos">
 
                     <div class="accordion" id="accordionExample">
@@ -48,19 +51,19 @@
                           <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="room_name">Nama</label>
+                                    <label for="room_name">Nama <span class="text-red font-bold">*</span></label>
                                     <input type="text" name="room_name[]" class="form-control" placeholder="Kamar Tipe A" >
                                 </div>
                                 <div class="form-group">
-                                    <label for="price">Harga/bulan</label>
+                                    <label for="price">Harga/bulan <span class="text-red font-bold">*</span></label>
                                     <input type="text" name="price[]" class="form-control" >
                                 </div>
                                 <div class="form-group">
-                                    <label for="room">Jumlah Kamar</label>
+                                    <label for="room">Jumlah Kamar <span class="text-red font-bold">*</span></label>
                                     <input type="number" name="room[]" class="form-control" >
                                 </div>
                                 <div class="form-group">
-                                    <label for="available">Kamar Tersedia</label>
+                                    <label for="available">Kamar Tersedia <span class="text-red font-bold">*</span></label>
                                     <input type="number" name="available[]" class="form-control" >
                                 </div>
                                 <div class="form-group">
@@ -68,7 +71,7 @@
                                     <textarea name="description[]" class="form-control" ></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="room_type">Tipe Kamar</label>
+                                    <label for="room_type">Tipe Kamar <span class="text-red font-bold">*</span></label>
                                     <select name="room_type_id[]" id="room_type" class="form-control">
                                         <option value="">Pilih Tipe Kamar</option>
                                         @foreach ($room_types as $room_type)
@@ -84,14 +87,13 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label for="fasilitas">Fasilitas</label>
-                                                        <input type="text" name="facility[][]" class="form-control" id="fasilitas">
+                                                        <input type="text" name="facility[]" class="form-control" id="fasilitas">
                                                     </div>
                                                 </div>
                                                 <div class="col">
-                                                    {{-- image --}}
                                                     <div class="form-group" >
                                                         <label for="image">Gambar</label>
-                                                        <input type="file" name="image[][]" class="form-control" >
+                                                        <input type="file" name="image[]" class="form-control" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -176,14 +178,14 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label for="fasilitas">Fasilitas</label>
-                                                        <input type="text" name="facility[][]" class="form-control" id="fasilitas">
+                                                        <input type="text" name="facility[]" class="form-control" id="fasilitas">
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     {{-- image --}}
                                                     <div class="form-group" >
                                                         <label for="image">Gambar</label>
-                                                        <input type="file" name="image[][]" class="form-control" >
+                                                        <input type="file" name="image[]" class="form-control" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -207,7 +209,7 @@
                             <div class="form-group
                             ">
                                 <label for="fasilitas">Fasilitas</label>
-                                <input type="text" name="facility[][]" class="form-control" id="fasilitas">
+                                <input type="text" name="facility[]" class="form-control" id="fasilitas">
                             </div>
                         </div>
                         <div class="col">
@@ -215,7 +217,7 @@
                             <div class="form-group
                             ">
                                 <label for="image">Gambar</label>
-                                <input type="file" name="image[][]" class="form-control" >
+                                <input type="file" name="image[]" class="form-control" >
                             </div>
                         </div>
                     </div>

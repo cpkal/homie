@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateIndekosRequest;
+use App\Models\Facility;
 use App\Models\Indekos;
 use App\Models\Room;
+use App\Models\RoomFacility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,7 +36,7 @@ class IndekosController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateIndekosRequest $request)
     {        
         // start transaction
         DB::beginTransaction();
@@ -56,9 +59,31 @@ class IndekosController extends Controller
             $room->indekos_id = $indekos->id;
             $room->save();
 
-            // foreach($request->facilities[$idx] as $facility) {
-            //     $room->facilities()->attach($facility);
-            // }
+            foreach($request->facility as $idx  => $fac) {
+                $facility = Facility::where('name', $fac)->first();
+
+                $image = null;
+                $imageName = null;
+                if($request->file('image') != null) {
+                    // move image to public
+                    $image = $request->file('image')[$idx];
+                    $imageName = $image->getClientOriginalName() . '-' . time() . '.' . $image->extension();
+                    $image->move(public_path('/uploads/facilities'), $image->getClientOriginalName());
+                }
+                
+                if(!$facility) {
+                    $facility = new Facility();
+                    $facility->name = $fac;
+                    $facility->image = $imageName;
+                    $facility->save();
+                }
+
+                $roomFacility = new RoomFacility();
+                $roomFacility->room_id = $room->id;
+                $roomFacility->facility_id = $facility->id;
+                $roomFacility->save();
+
+            }
         }
 
         // commit transaction
@@ -92,7 +117,7 @@ class IndekosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // return $request->all();
+        
         // start transaction
         DB::beginTransaction();
 
@@ -114,7 +139,7 @@ class IndekosController extends Controller
             $room->save();
 
             // $room->facilities()->detach();
-            // foreach($request->facilities[$idx] as $facility) {
+            // foreach($request->facilities as $facility) {
             //     $room->facilities()->attach($facility);
             // }
         }

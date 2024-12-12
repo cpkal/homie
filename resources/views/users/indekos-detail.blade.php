@@ -12,7 +12,9 @@
         Konsultasi
     </a>
     <div class="navbar fixed-top mb-5 mb-lg-0">
-        <img class="d-none d-md-block" src="{{ asset('assets/images/logo.png') }}" alt="">
+        <a href="{{ url('/') }}">
+            <img class="d-none d-md-block" src="{{ asset('assets/images/logo.png') }}" alt="">
+        </a>
         <div class="nav-items d-none d-md-block">
             <a href="{{ url('/') }}" class="mx-1" style="color: white;">Beranda</a>
             <a href="#wilayah" class="mx-1" style="color: white;">Wilayah</a>
