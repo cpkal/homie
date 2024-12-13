@@ -18,6 +18,17 @@ class Room extends Model
     }
 
     public function roomFacilities() {
-        return $this->belongsToMany(RoomFacility::class, 'room_facility', 'room_id', 'facility_id');
+        return $this->belongsToMany(Facility::class, 'room_facilities', 'room_id', 'facility_id');
+    }
+
+    public function indekos() {
+        return $this->belongsTo(Indekos::class);
+    }
+
+    // toRupiah
+    public function toRupiah($amount = null)
+    {
+        $amount = $amount ?? $this->price; // Use model's price if no amount is passed
+        return 'Rp ' . number_format($amount, 0, ',', '.');
     }
 }

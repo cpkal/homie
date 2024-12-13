@@ -31,20 +31,23 @@
             <div class="p-3 min-vh-100">
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
                     @foreach ($indekos_with_rooms as $item)
-                    <div class="col">
-                        <a href="{{ url('/indekos/' . $item->id) }}">
-                            <div>
-                                <img src="{{ $item->rooms[0]->image ?? 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png' }}" class="custom-card-thumbnail ratio-portrait" alt="Doctor" />
+                        @foreach ($item['rooms'] as $room)
+                            <div class="col">
+                                <a href="{{ url('/indekos/' . $room->id) }}">
+                                    <div>
+                                        <img src="{{ $room['image'] ?? 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png' }}" class="custom-card-thumbnail ratio-portrait" alt="Doctor" />
+                                    </div>
+                                    <div class="custom-card-body px-4 py-3 d-flex align-items-center justify-content-between">
+                                        <div class="mt-4 mt-lg-4">
+                                            <p class="fw-bold">{{ $item['name']. ' - ' .$room['name'] }}</p>
+                                            <p class="fw-normal">{{ $room->toRupiah() }}</p>
+                                        </div>
+                                        <img src="{{ asset('assets/images/plus.png') }}" class="mt-4" height="32" width="32" />
+                                    </div>
+                                </a>
                             </div>
-                            <div class="custom-card-body px-4 py-3 d-flex align-items-center justify-content-between">
-                                <div class="mt-4 mt-lg-4">
-                                    <p class="fw-bold">{{ $item->name }}</p>
-                                    <p class="fw-normal">{{ $item->rooms[0]->price }}</p>
-                                </div>
-                                <img src="{{ asset('assets/images/plus.png') }}" class="mt-4" height="32" width="32" />
-                            </div>
-                        </a>
-                    </div>
+                            
+                        @endforeach
                     @endforeach
                 </div>
             </div>
@@ -75,29 +78,15 @@
 
             <div class="mt-5 text-white overflow-">
                 <h5>Pesanan Terkini</h5>
-                <div class="card-pesanan-terkini d-flex mt-3 align-items-center">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSeVsof0lPg6HGNNZJs7RnDa8SFQYTxIxUSA&s" class="me-2 img-squared" height="52" />
-                    <div style="font-size: 14px;">
-                        <p>Kost Azzahra 2</p>
-                        <p>Rp. 1.000.000 / bulan</p>
+                @foreach ($recent_succeed_bookings as $item)
+                    <div class="card-pesanan-terkini d-flex mt-3 align-items-center">
+                        <img src="{{ $item->room->image ?? 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png' }}" class="me-2 img-squared" height="52" />
+                        <div style="font-size: 14px;">
+                            <p>{{ $item->indekos->name . ' - ' . $item->room->name }}</p>
+                            <p>{{ $item->room->toRupiah() }}</p>
+                        </div>
                     </div>
-                </div>
-
-                <div class="card-pesanan-terkini d-flex mt-3 align-items-center">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSeVsof0lPg6HGNNZJs7RnDa8SFQYTxIxUSA&s" class="me-2 img-squared" height="52" />
-                    <div style="font-size: 14px;">
-                        <p>Kost Azzahra 2</p>
-                        <p>Rp. 1.000.000 / bulan</p>
-                    </div>
-                </div>
-
-                <div class="card-pesanan-terkini d-flex mt-3 align-items-center">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSeVsof0lPg6HGNNZJs7RnDa8SFQYTxIxUSA&s" class="me-2 img-squared" height="52" />
-                    <div style="font-size: 14px;">
-                        <p>Kost Azzahra 2</p>
-                        <p>Rp. 1.000.000 / bulan</p>
-                    </div>
-                </div>
+                @endforeach
 
             </div>
         </div>

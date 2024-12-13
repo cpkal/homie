@@ -19,27 +19,46 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Alamat</th>
-                    <th scope="col">Owner</th>
+                    <th scope="col">Nama Kos</th>
+                    <th scope="col">Tipe Kamar</th>
+                    <th scope="col">Pemesan</th>
+                    <th scope="col">Tanggal Booking</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>
-                        <a href="{{ route('booking.edit', 1) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('booking.destroy', 1) }}" method="post" class="d-inline">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="btn btn-danger">Hapus</button>
-                        </form>
-                    </td>
-                  </tr>
+                  @foreach ($bookings as $booking)
+                      <tr>
+                          <th scope="row">{{ $loop->iteration }}</th>
+                          <td>{{ $booking->indekos->name ?? 'NULL' }}</td>
+                          <td>{{ $booking->room->name }}</td>
+                          <td>{{ $booking->user->name }}</td>
+                          <td>{{ $booking->booking_date }}</td>
+                          <td>
+                                @if ($booking->status == 'cancelled')
+                                    <span class="badge badge-danger">{{ $booking->status }}</span>
+                                @else
+                                    <span class="badge badge-success">{{ $booking->status }}</span>
+                                @endif
+                          </td>
+                          <td>
+                              {{-- <a href="{{ route('booking.edit', $booking->id) }}" class="btn btn-warning">Edit</a> --}}
+                              {{-- change status --}}
+                                <form action="{{ route('booking.update', $booking->id) }}" method="post" class="d-inline">
+                                    @csrf
+                                    @method('put')
+                                    <input type="hidden" name="status" value="{{ $booking->status == 'cancelled' ? 'confirmed' : 'cancelled' }}">
+                                    <button type="submit" class="btn btn-info">Change Status</button>
+                                </form>
+                              <form action="{{ route('booking.destroy', $booking->id) }}" method="post" class="d-inline">
+                                  @csrf
+                                  @method('delete')
+                                  <button type="submit" class="btn btn-danger">Hapus</button>
+                              </form>
+                          </td>
+                      </tr>
+                  @endforeach
                 </tbody>
               </table>
         </div>
@@ -52,5 +71,4 @@
 @stop
 
 @section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
 @stop

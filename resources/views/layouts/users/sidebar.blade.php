@@ -32,9 +32,11 @@
         </div>
     </div>
 
-    <div class="position-absolute bottom-0">
-        <div class="pb-2 p-lg-3 text-white ">
-            <a href="{{ url('/logout') }}">Logout</a>
+    @if (Auth::check())
+        <div class="position-absolute bottom-0">
+            <div class="pb-2 p-lg-3 text-white">
+                <a href="{{ url('/logout') }}">Logout</a>
+            </div>
         </div>
-    </div>
+    @endif
 </div>

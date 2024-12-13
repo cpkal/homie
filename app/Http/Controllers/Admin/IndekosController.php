@@ -38,6 +38,7 @@ class IndekosController extends Controller
      */
     public function store(CreateIndekosRequest $request)
     {        
+        // return $request->all();
         // start transaction
         DB::beginTransaction();
 
@@ -60,28 +61,31 @@ class IndekosController extends Controller
             $room->save();
 
             foreach($request->facility as $idx  => $fac) {
-                $facility = Facility::where('name', $fac)->first();
+                foreach($fac as $item) {
+                    $facility = Facility::where('name', $item)->first();
+                    $image = null;
+                    $imageName = null;
+                    if($request->file('image') != null) {
+                        // move image to public
+                        $image = $request->file('image')[$idx];
+                        $imageName = $image->getClientOriginalName() . '-' . time() . '.' . $image->extension();
+                        $image->move(public_path('/uploads/facilities'), $image->getClientOriginalName());
+                    }
+                    
+                    if(!$facility) {
+                        $facility = new Facility();
+                        $facility->name = $item;
+                        $facility->image = $imageName;
+                        $facility->save();
+                    }
 
-                $image = null;
-                $imageName = null;
-                if($request->file('image') != null) {
-                    // move image to public
-                    $image = $request->file('image')[$idx];
-                    $imageName = $image->getClientOriginalName() . '-' . time() . '.' . $image->extension();
-                    $image->move(public_path('/uploads/facilities'), $image->getClientOriginalName());
+                    $roomFacility = new RoomFacility();
+                    $roomFacility->room_id = $room->id;
+                    $roomFacility->facility_id = $facility->id;
+                    $roomFacility->save();
                 }
+
                 
-                if(!$facility) {
-                    $facility = new Facility();
-                    $facility->name = $fac;
-                    $facility->image = $imageName;
-                    $facility->save();
-                }
-
-                $roomFacility = new RoomFacility();
-                $roomFacility->room_id = $room->id;
-                $roomFacility->facility_id = $facility->id;
-                $roomFacility->save();
 
             }
         }
@@ -160,11 +164,21 @@ class IndekosController extends Controller
         //find room
         $rooms = Room::where('indekos_id', $id)->get();
         foreach ($rooms as $room) {
+            //remove room facility
+            $roomFacilities = RoomFacility::where('room_id', $room->id)->get();
+            foreach ($roomFacilities as $roomFacility) {
+                $roomFacility->delete();
+            }
             $room->delete();
         }
 
         $indekos->delete();
 
         return redirect('admin/indekos');
+    }
+
+    public function findRoomByIndekosId($indekos_id) {
+        $rooms = Room::where('indekos_id', $indekos_id)->get();
+        return response()->json($rooms);
     }
 }

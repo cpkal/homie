@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
+use App\Models\Indekos;
+use App\Models\Room;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
@@ -12,7 +17,8 @@ class BookingController extends Controller
      */
     public function index()
     {
-        return view('admins.booking.index');
+        $data['bookings'] = Booking::all();
+        return view('admins.booking.index', $data);
     }
 
     /**
@@ -20,7 +26,9 @@ class BookingController extends Controller
      */
     public function create()
     {
-        //
+        $data['indekos'] = Indekos::all();
+        $data['customers'] = User::all();
+        return view('admins.booking.create', $data);
     }
 
     /**
@@ -28,7 +36,24 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+
+        $booking = new Booking();
+        $booking->indekos_id = $request->indekos;
+        $booking->room_id = $request->room;
+        $booking->status = $request->status;
+        $booking->user_id = $request->customer;
+        $booking->booking_date = $request->booking_date;
+        $booking->save();
+
+        // decrease room available
+        $room = Room::find($request->room);
+        $room->room_available = $room->room_available - 1;
+        $room->save();
+
+        DB::commit();
+
+        return redirect()->route('booking.index');
     }
 
     /**
@@ -52,7 +77,21 @@ class BookingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        DB::beginTransaction();
+
+        $booking = Booking::find($id);
+        $booking->status = $request->status;
+        $booking->save();
+
+        if($request->status == 'cancel') {
+            $room = Room::find($booking->room_id);
+            $room->room_available = $room->room_available + 1;
+            $room->save();
+        }
+
+        DB::commit();
+
+        return redirect()->route('booking.index');
     }
 
     /**
@@ -60,6 +99,9 @@ class BookingController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $booking = Booking::find($id);
+        $booking->delete();
+
+        return redirect()->route('booking.index');
     }
 }

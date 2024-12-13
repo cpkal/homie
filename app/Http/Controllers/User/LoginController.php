@@ -18,22 +18,24 @@ class LoginController extends Controller
     {
         $credentials = $request->only('phone');
 
-
         $user = User::where('phone', $credentials['phone'])->first();
 
         if (!$user) {
             $user = new User();
             $user->phone = $credentials['phone'];
-            $user->otp_code = rand(1000, 9999);
+            $user->otp_code = 123456;
             $user->save();
 
             // send otp to user
 
             return redirect()->route('otp', ['phone' => $user->phone]);
-        }
+        } else {
+            $user->otp_code = 123456;
+            $user->save();
 
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('home');
+            // send otp to user
+
+            return redirect()->route('otp', ['phone' => $user->phone]);
         }
 
         return redirect()->back()->with('error', 'Terjadi kesalahan');

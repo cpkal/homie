@@ -87,13 +87,13 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label for="fasilitas">Fasilitas</label>
-                                                        <input type="text" name="facility[]" class="form-control" id="fasilitas">
+                                                        <input type="text" name="facility[0][]" class="form-control" id="fasilitas">
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group" >
                                                         <label for="image">Gambar</label>
-                                                        <input type="file" name="image[]" class="form-control" >
+                                                        <input type="file" name="image[0][]" class="form-control" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -178,14 +178,14 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label for="fasilitas">Fasilitas</label>
-                                                        <input type="text" name="facility[]" class="form-control" id="fasilitas">
+                                                        <input type="text" name="facility[${room}][]" class="form-control" id="fasilitas">
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     {{-- image --}}
                                                     <div class="form-group" >
                                                         <label for="image">Gambar</label>
-                                                        <input type="file" name="image[]" class="form-control" >
+                                                        <input type="file" name="image[${room}][]" class="form-control" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -209,7 +209,7 @@
                             <div class="form-group
                             ">
                                 <label for="fasilitas">Fasilitas</label>
-                                <input type="text" name="facility[]" class="form-control" id="fasilitas">
+                                <input type="text" name="facility[${room}][]" class="form-control" id="fasilitas">
                             </div>
                         </div>
                         <div class="col">
@@ -217,7 +217,7 @@
                             <div class="form-group
                             ">
                                 <label for="image">Gambar</label>
-                                <input type="file" name="image[]" class="form-control" >
+                                <input type="file" name="image[${room}][]" class="form-control" >
                             </div>
                         </div>
                     </div>
