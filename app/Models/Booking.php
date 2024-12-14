@@ -27,4 +27,10 @@ class Booking extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // format date
+    public function getBookingDateAttribute($value)
+    {
+        return date('d-m-Y H:h', strtotime($value));
+    }
 }

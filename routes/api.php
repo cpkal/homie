@@ -9,3 +9,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/rooms/{indekos_id}', [IndekosController::class, 'findRoomByIndekosId']);
+
+

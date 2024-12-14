@@ -19,10 +19,31 @@
                     </div>
                 </form>
                 <div class="col-4 d-flex">
-                    {{-- <img class="d-block d-lg-none" src="{{ asset('assets/images/indonesia.png') }}" width="32" > --}}
-                    <div>
-                        <img src="{{ asset('assets/images/bell.png') }}" alt="Notification" height="32" width="32" class="mx-2"  />
-                    </div>
+                    <div class="dropdown rounded">
+                        <!-- Bell Icon -->
+                        <img src="{{ asset('assets/images/bell.png') }}" alt="Notification" height="32" width="32" class="mx-2" data-bs-toggle="dropdown" aria-expanded="false" />
+                    
+                        <!-- Dropdown Menu -->
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown" style="min-width: 350px; max-height: 300px; overflow-y: auto;">
+                            @foreach ($notifications as $notification)
+                                <!-- Notification 1 -->
+                                <div class="d-flex align-items-center p-3">
+                                    <img src={{ $notification->image ?? 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png'  }}  alt="User" class="rounded-circle me-3" width="50" />
+                                    <div class="notification-{{ $notification->id }}">
+                                        <h6 class="mb-1">{{ $notification->title }}</h6>
+                                        <p class="mb-0">{{ $notification->message }}</p>
+                                    </div>
+                                </div>
+                                {{-- if last iteration dont show divider --}}
+                                @if (!$loop->last)
+                                    <hr class="dropdown-divider">
+                                @endif
+                            @endforeach
+                            
+                        </div>
+                    
+     
+                    
                     <a href="{{ url('/profile') }}">
                         <img src="{{ asset('assets/images/user-profile.png') }}" alt="User" height="32" width="32"  />
                     </a>
@@ -96,3 +117,29 @@
 </div>
     
 @stop
+
+@section('js')
+    <script>
+        // when dropdown notification on click, mark as read and send also id to backend
+        $('.dropdown').on('click', function() {
+            // get list notification id from id start with notification-*
+            const notificationId = $(this).attr('id').split('-')[1];
+
+            console.log(notificationId);
+
+            const response = await fetch(`http://localhost:8000/api/notifications/`, 
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                body: JSON.stringify({
+                    id: notificationId
+                })
+            });
+            );
+        });
+    </script>
+@endsection

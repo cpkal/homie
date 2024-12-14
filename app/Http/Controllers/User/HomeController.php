@@ -5,7 +5,9 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Indekos;
+use App\Models\Notification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -21,6 +23,7 @@ class HomeController extends Controller
         }
 
         $data['recent_succeed_bookings'] = Booking::where('status', 'confirmed')->orderBy('created_at', 'desc')->limit(5)->get();
+        $data['notifications'] = Notification::where('user_id', Auth::id())->orderBy('created_at', 'desc')->limit(5)->get();
 
         return view('users.home', $data);
     }

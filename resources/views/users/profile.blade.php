@@ -16,10 +16,12 @@
                     {{-- <img class="d-block d-lg-none" src="{{ asset('assets/images/indonesia.png') }}" width="32" > --}}
                     <div>
                         <img src="{{ asset('assets/images/bell.png') }}" alt="Notification" height="32" width="32" class="mx-2"  />
-                        <img src="{{ asset('assets/images/user-profile.png') }}" alt="User" height="32" width="32"  />
+                        <a href="{{ url('/profile') }}">
+                            <img src="{{ asset('assets/images/user-profile.png') }}" alt="User" height="32" width="32"  />
+                        </a>
                     
                     </div>
-                    <div class="localization d-flex">
+                    <div class="localization d-flex gap-3">
                         <img src="{{ asset('assets/images/inggris.jpg') }}" class="mx-2" width="32" >
                         {{-- slider --}}
                         <div class="form-check form-switch">

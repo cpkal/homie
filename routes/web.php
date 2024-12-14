@@ -30,4 +30,6 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/admin/account/{id}/edit-password', [App\Http\Controllers\Admin\AdminController::class, 'editPassword'])->name('account.edit-password');
     Route::put('/admin/account/{id}/update-password', [App\Http\Controllers\Admin\AdminController::class, 'updatePassword'])->name('account.update-password');
     Route::resource('/admin/customers', App\Http\Controllers\Admin\CustomerController::class);
+    Route::get('/admin/notification', [App\Http\Controllers\Admin\NotificationController::class, 'index'])->name('notification');
+    Route::post('/admin/notification', [App\Http\Controllers\Admin\NotificationController::class, 'postNotification'])->name('post.notification');
 });

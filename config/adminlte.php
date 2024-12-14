@@ -343,12 +343,17 @@ return [
             'url' => 'admin/indekos',
             'icon' => 'fas fa-fw fa-home',
         ],
-        // ['header' => 'MISC'],
+        ['header' => 'MISC'],
         // [
         //     'text' => 'Tentang Kami',
         //     'url' => 'admin/about-us',
         //     'icon' => 'fas fa-fw fa-question',
         // ],
+        [
+            'text' => 'Notifikasi',
+            'url' => 'admin/notification',
+            'icon' => 'fas fa-fw fa-bell',
+        ]
         // [
         //     'text' => 'multilevel',
         //     'icon' => 'fas fa-fw fa-share',

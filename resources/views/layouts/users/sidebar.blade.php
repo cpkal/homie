@@ -27,7 +27,7 @@
         <div class="py-3 px-2">
             <div class="d-flex align-items-center {{ request()->is('pengaturan') ? 'custom-btn-secondary text-white' : '' }}" style="border-radius: 40px / 35px; font-size: 16px;">
                 <img src="{{ asset('assets/images/setting.png') }}" class="mx-2" height="18" width="18" />
-                <a href="{{ url('/pengaturan') }}" class="d-none d-md-block"  style="color: {{ request()->is('pengaturan') ? 'white' : 'black' }}">Pengaturan</a>
+                <a href="{{ url('/pengaturan?tab=history_order') }}" class="d-none d-md-block"  style="color: {{ request()->is('pengaturan') ? 'white' : 'black' }}">Pengaturan</a>
             </div>
         </div>
     </div>
