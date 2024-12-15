@@ -57,6 +57,10 @@
                                         <input type="text" name="room_name[]" class="form-control" placeholder="Kamar Tipe A" value="{{ $room->name }}" >
                                     </div>
                                     <div class="form-group">
+                                        <label for="room_name">Foto</label>
+                                        <input type="file" name="room_image[]" class="form-control" >
+                                    </div>
+                                    <div class="form-group">
                                         <label for="price">Harga/bulan</label>
                                         <input type="text" name="price[]" class="form-control" value="{{ $room->price }}" >
                                     </div>
@@ -88,21 +92,23 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="form-group" id="facility-indekos">
+                                                @foreach ($room->roomFacilities as $facility)
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="fasilitas">Fasilitas</label>
-                                                            <input type="text" name="facility[][]" class="form-control" id="fasilitas">
+                                                            <input type="text" name="facility[{{ $loop->iteration - 1 }}][]" class="form-control" id="fasilitas" value="{{ $facility->name }}">
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         {{-- image --}}
                                                         <div class="form-group" >
                                                             <label for="image">Gambar</label>
-                                                            <input type="file" name="image[][]" class="form-control" >
+                                                            <input type="file" name="image[{{ $loop->iteration - 1 }}][]" class="form-control" >
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @endforeach
                                                 <button type="button" class="btn btn-primary" id="add-facility">Tambah Fasilitas</button>
                                             </div>
                                         </div>
@@ -151,6 +157,10 @@
                                 <div class="form-group">
                                     <label for="room_name">Nama</label>
                                     <input type="text" name="room_name[]" class="form-control" placeholder="Kamar Tipe A" >
+                                </div>
+                                <div class="form-group">
+                                    <label for="room_name">Foto</label>
+                                    <input type="file" name="room_image[]" class="form-control" >
                                 </div>
                                 <div class="form-group">
                                     <label for="price">Harga/bulan</label>

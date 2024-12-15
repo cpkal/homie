@@ -31,4 +31,10 @@ class Room extends Model
         $amount = $amount ?? $this->price; // Use model's price if no amount is passed
         return 'Rp ' . number_format($amount, 0, ',', '.');
     }
+
+    // get room image path
+    public function getImagePath()
+    {
+        return asset('uploads/rooms/' . $this->image);
+    }
 }

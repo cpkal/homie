@@ -16,14 +16,22 @@
             <img class="d-none d-md-block" src="{{ asset('assets/images/logo.png') }}" alt="">
         </a>
         <div class="nav-items d-none d-md-block">
-            <a href="{{ url('/') }}" class="mx-1" style="color: white;">Beranda</a>
-            <a href="#wilayah" class="mx-1" style="color: white;">Wilayah</a>
-            <a href="#fasilitas" class="mx-1" style="color: white;">Properti</a>
-            <a href="#tentang" class="mx-1" style="color: white;">Tentang</a>
+            <a href="{{ url('/') }}" class="mx-1" style="color: white;">
+                {{ __('page.home') }}
+            </a>
+            <a href="#wilayah" class="mx-1" style="color: white;">
+                {{ __('page.region') }}
+            </a>
+            <a href="#fasilitas" class="mx-1" style="color: white;">
+                {{ __('page.facility') }}
+            </a>
+            <a href="#tentang" class="mx-1" style="color: white;">
+                {{ __('page.about') }}
+            </a>
         </div>
         <div class="nav-trailing d-none d-md-block">
-            <a href="https://api.whatsapp.com/send/?phone=08965345&text=Hai saya ingin konsultasi untuk kos {{$room->indekos->name}} dengan tipe kamar {{$room->name}} " class="custom-btn-secondary">Konsultasi</a>
-            <a href="{{ url('/profile') }}">
+            <a href="https://api.whatsapp.com/send/?phone=08965345&text=Hai saya ingin konsultasi untuk kos {{$room->indekos->name}} dengan tipe kamar {{$room->name}} " class="consult-button p-2 rounded">Konsultasi</a>
+            <a href="{{ url('/profile') }}" >
                 <img src="{{ asset('assets/images/user.png') }}" class="mx-3" height="32" width="32">
             </a>
         </div>
@@ -49,7 +57,9 @@
             </div>
             <div class="d-flex align-items-center mt-3">
                 <a href="https://api.whatsapp.com/send/?phone=08965345&text=Hai saya ingin booking {{$room->indekos->name }} dengan tipe kamar {{ $room->name }}" class="custom-btn-white" style="font-weight: bold;">
-                    <p>Ajukan Sewa</p>
+                    <p>
+                        {{ __('page.rent_now') }}
+                    </p>
                 </a>
                 <h3 class="mx-3" style="font-weight: 200;">{{ $room->toRupiah() }}</h3>
             </div>
@@ -57,7 +67,7 @@
     
         <!-- Right section -->
         <div class="w-100 w-md-50 order-2 order-1-lg">
-            <img src="{{ $room->image ?? 'https://salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled.png' }}" class="w-100" alt="Sagita Kost">
+            <img src="{{ $room->image ? asset('uploads/rooms/' . $room->image) : 'https://salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled.png' }}" class="w-100" alt="Sagita Kost">
         </div>
     </div>
 
@@ -65,7 +75,7 @@
         <div class="your-class mx-5">
             @foreach ($facilities as $facility)
                 <div class="custom-white-card pb-5 d-flex flex-column align-items-center">
-                    <img src="{{ $facility->image ?? 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png'  }}" class="rounded-circle" alt="Sagita Kost" height="52">
+                    <img src="{{ $facility->image ? asset('uploads/facilities/' . $facility->image) : 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png'  }}" class="rounded-circle" alt="Sagita Kost" height="52">
                     {{-- try to query facilities by facility_id on facility --}}
                     <p class="mt-3" style="font-weight: bold">{{ $facility->name }} </p>
                 </div>

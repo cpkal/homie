@@ -16,7 +16,7 @@ return new class extends Migration
             $table->dropColumn('email_verified_at');
             $table->dropColumn('password');
             $table->dropColumn('remember_token');
-            $table->dropColumn('password');
+            // $table->dropColumn('password');
             
             // add column phone
             $table->string('phone')->unique();

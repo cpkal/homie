@@ -21,14 +21,25 @@
                         </a>
                     
                     </div>
-                    <div class="localization d-flex gap-3">
-                        <img src="{{ asset('assets/images/inggris.jpg') }}" class="mx-2" width="32" >
-                        {{-- slider --}}
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                    <form action="{{ route('set-locale') }}" method="POST">
+                        @csrf
+                        <div class="localization d-flex w-full gap-3 justify-content-around">
+                            <!-- English Language Icon -->
+                            <img src="{{ asset('assets/images/inggris.jpg') }}" class="mx-2" width="32" alt="English">
+                            
+                            <!-- Language Toggle Switch -->
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="switchLanguage" 
+                                       {{ app()->getLocale() === 'id' ? 'checked' : '' }}>
+                            </div>
+                            
+                            <!-- Indonesian Language Icon -->
+                            <img src="{{ asset('assets/images/indonesia.png') }}" width="32" alt="Bahasa Indonesia">
                         </div>
-                        <img src="{{ asset('assets/images/indonesia.png') }}" width="32" >
-                    </div>
+                        
+                        <!-- Hidden Input for Locale -->
+                        <input type="hidden" name="locale" id="localeInput" value="{{ app()->getLocale() }}">
+                    </form>
                 </div>
                 
             </div>
@@ -41,7 +52,7 @@
                                 {{ session()->get('success') }}
                             </div>
                         @endif
-                        <h1 class="ms-4">Profile</h1>
+                        <h1 class="ms-4">{{ __('page.profile') }}</h1>
                         <div class="ms-5">
                             <div class="form-group">
                                 <input name="name" class="input-border-yellow-radius-full" type="text" placeholder="Name" value="{{ $user->name }}">
@@ -66,7 +77,7 @@
                             <img src="{{ asset('assets/images/user-profile.png') }}" alt="User" height="200" width="200" class="rounded-circle" />
                         </div>
                         <button class="input-border-yellow-radius-full">
-                            Simpan Perubahan
+                            {{ __('page.save_changes') }}
                         </button>
                     </div>
                 </div>
@@ -77,3 +88,24 @@
 </div>
     
 @stop
+
+@section('js')
+    <script>
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const switchLanguage = document.getElementById('switchLanguage');
+            const localeInput = document.getElementById('localeInput');
+            const form = switchLanguage.closest('form');
+            
+            switchLanguage.addEventListener('change', function () {
+                // Set locale based on the switch state
+                localeInput.value = switchLanguage.checked ? 'id' : 'en';
+                
+                // Submit the form
+                form.submit();
+            });
+        });
+
+    </script>
+@endsection

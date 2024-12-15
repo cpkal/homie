@@ -98,6 +98,12 @@ p {
     
 }
 
+.consult-button {
+    /* bg primary */
+    background-color: #a6b6a9;
+    /*  */
+}
+
 .w-full {
     width: 100%;
 }

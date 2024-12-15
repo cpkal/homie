@@ -23,7 +23,9 @@
                             </div>
                         </div>
                         <div class="row mt-4 font-xs text-center px-0 px-lg-4">
-                            <p>By registering, You agree to the Terms, Conditions and Policies of Borcelle & Privacy Policy</p>
+                            <p>
+                                {{ __('page.terms_and_conditions') }}
+                            </p>
                         </div>
                     </div>
                 </form>

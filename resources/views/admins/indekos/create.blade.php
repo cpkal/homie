@@ -55,6 +55,10 @@
                                     <input type="text" name="room_name[]" class="form-control" placeholder="Kamar Tipe A" >
                                 </div>
                                 <div class="form-group">
+                                    <label for="room_name">Foto</label>
+                                    <input type="file" name="room_image[]" class="form-control" >
+                                </div>
+                                <div class="form-group">
                                     <label for="price">Harga/bulan <span class="text-red font-bold">*</span></label>
                                     <input type="text" name="price[]" class="form-control" >
                                 </div>
@@ -124,7 +128,7 @@
 @section('js')
     <script>
         // Add here extra scripts
-        var room = 1;
+        var room = 0;
         $(document).ready(function() {
             $('#add-room').click(function() {
                 $('#rooms-indekos').append(`
@@ -134,7 +138,7 @@
                           <div class="card-header" id="headingOne">
                             <h2 class="mb-0">
                               <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse${room}" aria-expanded="true" aria-controls="collapse${room}">
-                                <h3>Tipe Kamar ${room}</h3>
+                                <h3>Tipe Kamar ${room + 1}</h3>
                               </button>
                             </h2>
                           </div>
@@ -144,6 +148,10 @@
                                 <div class="form-group">
                                     <label for="room_name">Nama</label>
                                     <input type="text" name="room_name[]" class="form-control" placeholder="Kamar Tipe A" >
+                                </div>
+                                <div class="form-group">
+                                    <label for="room_name">Foto</label>
+                                    <input type="file" name="room_image[]" class="form-control" >
                                 </div>
                                 <div class="form-group">
                                     <label for="price">Harga/bulan</label>
